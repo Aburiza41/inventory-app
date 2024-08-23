@@ -1,0 +1,79 @@
+<?php
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return redirect()->route('login');
+});
+
+// Begin Route Casiher
+Route::prefix('/')->middleware(['auth', 'verified'])->group(
+    function () {
+        Route::get('dashboard', function () {
+            return view('dashboard');
+        })->middleware(['auth', 'verified'])->name('dashboard');
+
+        // Purchase Order
+        Route::prefix('/purchase-order')->name('purchase_order')->controller(\App\Http\Controllers\Web\PurchaseOrderController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+            Route::get('/create', 'create')->name('.create');
+            Route::post('/store', 'store')->name('.store');
+        });
+
+        // Purchase
+        Route::prefix('/purchase')->name('purchase')->controller(\App\Http\Controllers\Web\PurchaseController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+            Route::get('/create/{id}', 'create')->name('.create');
+            Route::post('/store/{id}', 'store')->name('.store');
+        });
+
+        // Inventory
+        Route::prefix('/inventory')->name('inventory')->controller(\App\Http\Controllers\Web\InventoryController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+            Route::get('/create', 'create')->name('.create');
+
+        });
+
+        // User
+        Route::prefix('/user')->name('user')->controller(\App\Http\Controllers\Web\UserController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+        });
+
+        // Owner
+        Route::prefix('/owner')->name('owner')->controller(\App\Http\Controllers\Web\OwnerController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+            Route::get('/create', 'create')->name('.create');
+        });
+
+        // Project
+        Route::prefix('/project')->name('project')->controller(\App\Http\Controllers\Web\ProjectController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+            Route::get('/create', 'create')->name('.create');
+        });
+
+        // Supplier
+        Route::prefix('/supplier')->name('supplier')->controller(\App\Http\Controllers\Web\SupplierController::class)->group(function () {
+            Route::get('/index', 'index')->name('.index');
+            Route::get('/create', 'create')->name('.create');
+        });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
