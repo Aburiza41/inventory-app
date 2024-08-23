@@ -19,10 +19,28 @@ class PurchaseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     $projects = Project::get();
+    //     return view('pages.purchase.index')->with(compact('projects'));
+    // }
+
+    public function index(Request $request)
     {
-        $projects = Project::get();
-        return view('pages.purchase.index')->with(compact('projects'));
+        // Membuat Owner  dasar untuk model Material
+        $query = Project::query();
+
+        // Jika parameter 'search' ada dan tidak kosong, tambahkan kondisi pencarian ke query
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('title', 'like', '%' . $search . '%');
+        }
+
+        // Melakukan paginasi dengan jumlah item per halaman 2
+        $projects = $query->paginate(2);
+
+        // Mengembalikan view dengan data materials
+        return view('pages.purchase.index', compact('projects'));
     }
 
     /**
@@ -83,6 +101,8 @@ try {
     DB::transaction(function () use ($uuid, $request) {
         // Temukan project berdasarkan UUID
         $project = Project::where('uuid', $uuid)->first();
+        $project->status = 'selesai';
+        $project->save();
 
         // Buat entri baru di MaterialOrder
         $materialOrder = new MaterialOrder();
@@ -151,7 +171,8 @@ try {
      */
     public function show(string $id)
     {
-        //
+        $item = Project::where('uuid', $id)->first();
+        return view('pages.purchase.show', compact('item'));
     }
 
     /**

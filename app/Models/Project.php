@@ -20,4 +20,10 @@ class Project extends Model
         // HasOne
         return $this->hasMany(ProjectMaterialList::class, 'project_id' , 'id');
     }
+
+    // public function material_order_lists()
+    // {
+    //     // HasOne
+    //     return $this->hasMany(MaterialOrderList::class, 'project_id', 'id');
+    // }
 }

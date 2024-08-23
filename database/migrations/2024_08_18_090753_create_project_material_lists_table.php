@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('unit');
             $table->decimal('quantity', 65, 0)->nullable(); // Jumlah Beli
             $table->decimal('price', 65, 0)->nullable(); // Jumlah Beli
-            $table->enum('status', ['PO', 'Dibeli'])->default('PO');
+            $table->enum('status', ['PO', 'Dibeli', 'Dibatalkan'])->default('PO');
             $table->timestamps();
         });
     }

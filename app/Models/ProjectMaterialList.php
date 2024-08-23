@@ -21,4 +21,10 @@ class ProjectMaterialList extends Model
         // HasOne
         return $this->belongsTo(Material::class);
     }
+
+    public function material_order_list()
+    {
+        // HasOne
+        return $this->hasOne(MaterialOrderList::class);
+    }
 }

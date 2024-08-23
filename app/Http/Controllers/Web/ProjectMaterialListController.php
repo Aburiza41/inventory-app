@@ -3,48 +3,28 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Material;
+use App\Models\ProjectMaterialList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class InventoryController extends Controller
+class ProjectMaterialListController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $materials = Material::get();
-    //     return view('pages.inventory.index')->with(compact('materials'));
-    // }
-
-    public function index(Request $request)
+    public function index()
     {
-        // Membuat query dasar untuk model Material
-        $query = Material::query();
-
-        // Jika parameter 'search' ada dan tidak kosong, tambahkan kondisi pencarian ke query
-        if ($request->filled('search')) {
-            $search = $request->input('search');
-            $query->where('title', 'like', '%' . $search . '%');
-        }
-
-        // Melakukan paginasi dengan jumlah item per halaman 2
-        $materials = $query->paginate(2);
-
-        // Mengembalikan view dengan data materials
-        return view('pages.inventory.index', compact('materials'));
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('pages.inventory.create');
+        //
     }
 
     /**
@@ -68,9 +48,9 @@ class InventoryController extends Controller
      */
     public function edit(string $id)
     {
-        $item = Material::where('uuid', $id)->first();
-        return view('pages.inventory.edit', compact('item'));
-        // return view('pages.inventory.edit');
+        $item = ProjectMaterialList::where('uuid', $id)->first();
+        // dd($item);
+        return view('pages.project.material_list.edit', compact('item'));
     }
 
     /**
@@ -80,11 +60,15 @@ class InventoryController extends Controller
     {
         // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
+            'vol' => 'required|min:1',
+            'harga' => 'required|min:1',
             'satuan' => 'required|string|max:255',
+            'jenis' => 'required|min:1',
         ], [
-            'title.required' => 'Title wajib diisi.',
+            'vol.required' => 'Jumlah volume wajib diisi.',
+            'harga.required' => 'Harga wajib diisi.',
             'satuan.required' => 'Satuan wajib diisi.',
+            'jenis.required' => 'Jenis wajib diisi.',
         ]);
 
         if ($validator->fails()) {
@@ -96,16 +80,18 @@ class InventoryController extends Controller
         try {
             DB::beginTransaction();
 
-            $item = Material::where('uuid', $id)->first();
-            $item->title = $request->title;
+            $item = ProjectMaterialList::where('uuid', $id)->first();
+            $item->quantity = $request->vol;
             $item->unit = $request->satuan;
+            $item->price = $request->harga;
+            $item->material_id = $request->jenis;
             $item->save();
 
             DB::commit();
 
-            Alert::success('Berhasil', 'Berhasil mengubah daftar belanja ' . $item->title);
+            Alert::success('Berhasil', 'Berhasil mengubah daftar belanja ' . $item->project->title);
 
-            return redirect()->route('inventory.index');
+            return redirect()->route('purchase_order.index');
             // return response()->json(['message' => 'Data berhasil disimpan'], 201);
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -122,6 +108,26 @@ class InventoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $item = ProjectMaterialList::where('uuid', $id)->first();
+            $item->status = "Dibatalkan";
+            $item->save();
+
+            DB::commit();
+
+            Alert::success('Berhasil', 'Berhasil mengubah daftar belanja ' . $item->project->title);
+
+            return redirect()->route('purchase_order.index');
+            // return response()->json(['message' => 'Data berhasil disimpan'], 201);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // throw $th;
+
+            Alert::error('Maaf', 'Gagal mengubah daftar belanja');
+            return redirect()->back();
+            // return response()->json(['message' => 'Terjadi kesalahan, data tidak tersimpan', 'error' => $th->getMessage()], 500);
+        }
     }
 }

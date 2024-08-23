@@ -75,7 +75,6 @@ class MaterialController extends Controller
             $material->uuid = (string) Str::uuid();
             $material->title = $request->title;
             $material->unit = $request->satuan;
-            $material->description = $request->description;
             $material->save();
 
             // Commit transaksi jika tidak ada error

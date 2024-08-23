@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MaterialOrderList extends Model
 {
     use HasFactory;
+    public function material_order()
+    {
+        // HasOne
+        return $this->belongsTo(MaterialOrder::class);
+    }
 }

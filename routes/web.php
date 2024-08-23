@@ -32,17 +32,27 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(
             Route::post('/store', 'store')->name('.store');
         });
 
+        Route::prefix('/project-material-list')->name('project_material_list')->controller(\App\Http\Controllers\Web\ProjectMaterialListController::class)->group(function () {
+            Route::get('/{uuid}/edit', 'edit')->name('.edit');
+            Route::patch('/{uuid}/update', 'update')->name('.update');
+            Route::delete('/{uuid}/delete', 'destroy')->name('.destroy');
+        });
+
         // Purchase
         Route::prefix('/purchase')->name('purchase')->controller(\App\Http\Controllers\Web\PurchaseController::class)->group(function () {
             Route::get('/index', 'index')->name('.index');
             Route::get('/create/{id}', 'create')->name('.create');
             Route::post('/store/{id}', 'store')->name('.store');
+            Route::get('/show/{id}', 'show')->name('.show');
         });
 
         // Inventory
         Route::prefix('/inventory')->name('inventory')->controller(\App\Http\Controllers\Web\InventoryController::class)->group(function () {
             Route::get('/index', 'index')->name('.index');
             Route::get('/create', 'create')->name('.create');
+            Route::get('/{uuid}/edit', 'edit')->name('.edit');
+            Route::patch('/{uuid}/update', 'update')->name('.update');
+            Route::delete('/{uuid}/delete', 'destroy')->name('.destroy');
 
         });
 
@@ -55,18 +65,24 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(
         Route::prefix('/owner')->name('owner')->controller(\App\Http\Controllers\Web\OwnerController::class)->group(function () {
             Route::get('/index', 'index')->name('.index');
             Route::get('/create', 'create')->name('.create');
+            Route::get('/{uuid}/edit', 'edit')->name('.edit');
+            Route::patch('/{uuid}/update', 'update')->name('.update');
         });
 
         // Project
         Route::prefix('/project')->name('project')->controller(\App\Http\Controllers\Web\ProjectController::class)->group(function () {
             Route::get('/index', 'index')->name('.index');
             Route::get('/create', 'create')->name('.create');
+            Route::get('/{uuid}/edit', 'edit')->name('.edit');
+            Route::patch('/{uuid}/update', 'update')->name('.update');
         });
 
         // Supplier
         Route::prefix('/supplier')->name('supplier')->controller(\App\Http\Controllers\Web\SupplierController::class)->group(function () {
             Route::get('/index', 'index')->name('.index');
             Route::get('/create', 'create')->name('.create');
+            Route::get('/{uuid}/edit', 'edit')->name('.edit');
+            Route::patch('/{uuid}/update', 'update')->name('.update');
         });
 });
 

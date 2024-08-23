@@ -8,17 +8,37 @@ use App\Models\ProjectMaterialList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PurchaseOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $ProjectMaterialLists = ProjectMaterialList::get();
+    // public function index()
+    // {
+    //     $ProjectMaterialLists = ProjectMaterialList::paginate(2);
 
-        return view('pages.purchase.order.index')->with(compact('ProjectMaterialLists'));
+    //     return view('pages.purchase.order.index')->with(compact('ProjectMaterialLists'));
+    // }
+    public function index(Request $request)
+    {
+        $query = ProjectMaterialList::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->whereHas('project.owner', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            })->orWhereHas('project', function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%');
+            })->orWhereHas('material', function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%');
+            });
+        }
+
+        $ProjectMaterialLists = $query->paginate(2);
+
+        return view('pages.purchase.order.index', compact('ProjectMaterialLists'));
     }
 
     /**
@@ -90,10 +110,15 @@ class PurchaseOrderController extends Controller
             }
 
             DB::commit();
-            return redirect()->back();
+
+            Alert::success('Berhasil', 'Berhasil Menambahkan daftar belanja '. $project->title);
+
+            return redirect()->route('purchase_order.index');
             // return response()->json(['message' => 'Data berhasil disimpan'], 201);
         } catch (\Throwable $th) {
             DB::rollBack();
+
+            Alert::error('Maaf', 'Gagal Menambahkan daftar belanja');
             return redirect()->back();
             // return response()->json(['message' => 'Terjadi kesalahan, data tidak tersimpan', 'error' => $th->getMessage()], 500);
         }

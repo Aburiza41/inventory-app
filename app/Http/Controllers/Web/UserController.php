@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -10,9 +11,27 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     return view('pages.user.index');
+    // }
+
+    public function index(Request $request)
     {
-        return view('pages.user.index');
+        // Membuat Owner  dasar untuk model Material
+        $query = User::query();
+
+        // Jika parameter 'search' ada dan tidak kosong, tambahkan kondisi pencarian ke query
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        // Melakukan paginasi dengan jumlah item per halaman 2
+        $users = $query->paginate(2);
+
+        // Mengembalikan view dengan data materials
+        return view('pages.user.index', compact('users'));
     }
 
     /**

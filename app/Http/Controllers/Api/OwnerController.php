@@ -52,15 +52,18 @@ class OwnerController extends Controller
         // dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'phone_1' => 'required|numeric|min:10',
-            'phone_2' => 'nullable|numeric|min:10',
-            'phone_3' => 'nullable|numeric|min:10',
-            'adress' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_1' => 'required',
+            'phone_2' => 'nullable',
+            'phone_3' => 'nullable',
+            'address' => 'required|string|max:255',
             'perusahaan' => 'required|string|max:255',
         ], [
             'name.required' => 'Nama wajib diisi.',
-            'phone_1.required' => 'Nomor telepon utama wajib diisi dan minimal 10 digit.',
-            'adress.required' => 'Alamat wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'phone_1.required' => 'Nomor telepon utama wajib diisi dan harus terdiri dari 10-15 digit.',
+            'address.required' => 'Alamat wajib diisi.',
             'perusahaan.required' => 'Nama perusahaan wajib diisi.',
         ]);
 
@@ -72,12 +75,13 @@ class OwnerController extends Controller
             $owner = new Owner();
             $owner->uuid = (string) Str::uuid();
             $owner->name = $request->name;
+            $owner->email = $request->email;
             $owner->phone_1 = $request->phone_1;
             $owner->phone_2 = $request->phone_2;
             $owner->phone_3 = $request->phone_3;
             $owner->email = $request->email;
             $owner->address = $request->address;
-            $owner->corporate = $request->corporate;
+            $owner->corporate = $request->perusahaan;
             $owner->save();
 
             // Commit transaksi jika tidak ada error

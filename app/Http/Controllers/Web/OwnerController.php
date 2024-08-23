@@ -5,16 +5,37 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Owner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OwnerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     $owners = Owner::get();
+    //     return view('pages.owner.index')->with(compact('owners'));
+    // }
+
+    public function index(Request $request)
     {
-        $owners = Owner::get();
-        return view('pages.owner.index')->with(compact('owners'));
+        // Membuat Owner  dasar untuk model Material
+        $query = Owner::query();
+
+        // Jika parameter 'search' ada dan tidak kosong, tambahkan kondisi pencarian ke query
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        // Melakukan paginasi dengan jumlah item per halaman 2
+        $owners = $query->paginate(2);
+
+        // Mengembalikan view dengan data materials
+        return view('pages.owner.index', compact('owners'));
     }
 
     /**
@@ -46,7 +67,8 @@ class OwnerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Owner::where('uuid', $id)->first();
+        return view('pages.owner.edit', compact('item'));
     }
 
     /**
@@ -54,7 +76,58 @@ class OwnerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone_1' => 'required',
+            'phone_2' => 'nullable',
+            'phone_3' => 'nullable',
+            'address' => 'required|string|max:255',
+            'perusahaan' => 'required|string|max:255',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'phone_1.required' => 'Nomor telepon utama wajib diisi dan harus terdiri dari 10-15 digit.',
+            'address.required' => 'Alamat wajib diisi.',
+            'perusahaan.required' => 'Nama perusahaan wajib diisi.',
+        ]);
+
+        if ($validator->fails()) {
+            // Set Alert
+            Alert::error('Error', $validator->errors()->first());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $item = Owner::where('uuid', $id)->first();
+            $item->name = $request->name;
+            $item->email = $request->email;
+            $item->phone_1 = $request->phone_1;
+            $item->phone_2 = $request->phone_2;
+            $item->phone_3 = $request->phone_3;
+            $item->email = $request->email;
+            $item->address = $request->address;
+            $item->corporate = $request->perusahaan;
+            $item->save();
+
+            DB::commit();
+
+            Alert::success('Berhasil', 'Berhasil mengubah daftar belanja ' . $item->name);
+
+            return redirect()->route('owner.index');
+            // return response()->json(['message' => 'Data berhasil disimpan'], 201);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // throw $th;
+
+            Alert::error('Maaf', 'Gagal mengubah daftar belanja');
+            return redirect()->back();
+            // return response()->json(['message' => 'Terjadi kesalahan, data tidak tersimpan', 'error' => $th->getMessage()], 500);
+        }
     }
 
     /**

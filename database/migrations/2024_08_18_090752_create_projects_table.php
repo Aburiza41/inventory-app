@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('owner_id')->constrained('owners');
             $table->string('uuid')->unique();
             $table->string('title');
+            $table->enum('status', ['aktif', 'selesai', 'batal'])->default('aktif');
             $table->timestamps();
         });
     }
