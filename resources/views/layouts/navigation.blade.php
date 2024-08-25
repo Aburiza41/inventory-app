@@ -68,14 +68,18 @@
             </div>
 
             <div class="-me-2 flex items-center">
+                <x-responsive-nav-link :href="route('profile.edit')" class="flex items-center">
+                    <i class='bx bxs-user me-2 text-xl'></i> {{ Auth::user()->name }} <span class="ms-2 font-light text-sm">({{ ucwords(str_replace('_', ' ', Auth::user()->role)) }})</span>
+                </x-responsive-nav-link>
+
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <a href="route('logout')" class="bg-gray-500 text-white rounded px-2 py-1 hover:bg-gray-700"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Keluar') }}
-                    </x-responsive-nav-link>
+                    </a>
                 </form>
             </div>
 

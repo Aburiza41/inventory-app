@@ -32,7 +32,7 @@ class OwnerController extends Controller
         }
 
         // Melakukan paginasi dengan jumlah item per halaman 2
-        $owners = $query->paginate(2);
+        $owners = $query->paginate(10);
 
         // Mengembalikan view dengan data materials
         return view('pages.owner.index', compact('owners'));

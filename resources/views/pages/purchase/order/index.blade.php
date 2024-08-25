@@ -5,11 +5,18 @@
                 {{ __('Daftar Rencana Pembelian') }}
             </h2>
 
-            <a href="{{ route('purchase_order.create') }}"
-                class="px-4 py-2 rounded bg-gray-500 text-white flex justify-between align-middle">
-                <span class="me-2 text-white font-bold">Buat Daftar Rencana Belanja</span>
-                <box-icon name='send' color="#EB3678" class="bg-white rounded"></box-icon>
-            </a>
+            <div class="flex gap-4">
+                <a href="{{ route('purchase_order.create') }}"
+                    class="px-4 py-2 rounded bg-gray-500 text-white flex justify-between align-middle">
+                    <span class="me-2 text-white font-bold">Buat Daftar Rencana Belanja Baru</span>
+                    <box-icon name='send' color="#EB3678" class="bg-white rounded"></box-icon>
+                </a>
+
+                <a href="{{ route('purchase_order.export') }}"
+                    class="px-4 py-2 rounded bg-gray-500 text-white flex justify-between align-middle">
+                    <i class='bx bx-printer text-xl' ></i>
+                </a>
+            </div>
 
         </div>
     </x-slot>
@@ -19,11 +26,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="mb-4">
-                        <form method="GET" action="{{ route('purchase_order.index') }}">
+                        <form method="GET" action="{{ route('purchase_order.index') }}" class="flex gap-4">
                             <input type="text" name="search" value="{{ request('search') }}"
                                 placeholder="Cari..."
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
-                            <button type="submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                            <button type="submit" class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py- px-4 rounded">
                                 Cari
                             </button>
                         </form>
@@ -51,14 +58,18 @@
                                     <td class="px-2 py-0">{{ $item->unit }}</td>
                                     <td class="px-2 py-0">{{ $item->price }}</td>
                                     <td class="px-2 py-0">
-                                        <a href="{{ route('project_material_list.edit', $item->uuid) }}" class="text-blue-600 hover:underline">Ubah</a>
                                         @if ($item->status === "PO")
+                                            <a href="{{ route('project_material_list.edit', $item->uuid) }}" class="text-blue-600 hover:underline">Ubah</a>
                                             |
                                             <form action="{{ route('project_material_list.destroy', $item->uuid) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Apakah Anda yakin ingin membatalkan daftar penjualan ini?')">Batal</button>
                                             </form>
+                                        @else
+                                            <span class="text-gray-400">
+                                                Dibatalkan
+                                            </span>
                                         @endif
                                     </td>
                                 </tr>

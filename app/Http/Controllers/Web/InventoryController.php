@@ -32,7 +32,7 @@ class InventoryController extends Controller
         }
 
         // Melakukan paginasi dengan jumlah item per halaman 2
-        $materials = $query->paginate(2);
+        $materials = $query->paginate(10);
 
         // Mengembalikan view dengan data materials
         return view('pages.inventory.index', compact('materials'));

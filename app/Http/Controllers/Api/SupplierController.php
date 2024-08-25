@@ -55,7 +55,7 @@ class SupplierController extends Controller
             'phone_1' => 'required|numeric|min:10',
             'phone_2' => 'nullable|numeric|min:10',
             'phone_3' => 'nullable|numeric|min:10',
-            'adress' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'perusahaan' => 'required|string|max:255',
         ], [
             'name.required' => 'Nama wajib diisi.',

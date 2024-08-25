@@ -28,7 +28,7 @@ class UserController extends Controller
         }
 
         // Melakukan paginasi dengan jumlah item per halaman 2
-        $users = $query->paginate(2);
+        $users = $query->paginate(10);
 
         // Mengembalikan view dengan data materials
         return view('pages.user.index', compact('users'));

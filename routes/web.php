@@ -30,6 +30,8 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(
             Route::get('/index', 'index')->name('.index');
             Route::get('/create', 'create')->name('.create');
             Route::post('/store', 'store')->name('.store');
+
+            Route::get('/export', 'export')->name('.export');
         });
 
         Route::prefix('/project-material-list')->name('project_material_list')->controller(\App\Http\Controllers\Web\ProjectMaterialListController::class)->group(function () {
@@ -44,6 +46,8 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(
             Route::get('/create/{id}', 'create')->name('.create');
             Route::post('/store/{id}', 'store')->name('.store');
             Route::get('/show/{id}', 'show')->name('.show');
+
+            Route::get('/export', 'export')->name('.export');
         });
 
         // Inventory
@@ -53,7 +57,6 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(
             Route::get('/{uuid}/edit', 'edit')->name('.edit');
             Route::patch('/{uuid}/update', 'update')->name('.update');
             Route::delete('/{uuid}/delete', 'destroy')->name('.destroy');
-
         });
 
         // User

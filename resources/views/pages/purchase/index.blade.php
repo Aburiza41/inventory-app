@@ -10,7 +10,10 @@
                 <span class="me-2 text-white font-bold">Buat Daftar Belanja</span>
                 <box-icon name='send' color="#EB3678" class="bg-white rounded"></box-icon>
             </a> --}}
-
+            <a href="{{ route('purchase.export') }}"
+                    class="px-4 py-2 rounded bg-gray-500 text-white flex justify-between align-middle">
+                    <i class='bx bx-printer text-xl' ></i>
+                </a>
         </div>
     </x-slot>
 
@@ -18,12 +21,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
+
                     <div class="mb-4">
-                        <form method="GET" action="{{ route('purchase.index') }}">
+                        <form method="GET" action="{{ route('purchase.index') }}" class="flex gap-4">
                             <input type="text" name="search" value="{{ request('search') }}"
                                 placeholder="Cari..."
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
-                            <button type="submit" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                            <button type="submit" class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py- px-4 rounded">
                                 Cari
                             </button>
                         </form>
@@ -33,9 +37,8 @@
                             <tr>
                                 <th class="px-2 py-1">Pekerjaan</th>
                                 <th class="px-2 py-1">Owner</th>
-                                <th class="px-2 py-1">Jumlah</th>
-                                <th class="px-2 py-1">Estimasi</th>
-                                <th class="px-2 py-1">Total</th>
+                                <th class="px-2 py-1">Estimasi Biaya</th>
+                                <th class="px-2 py-1">Total Biaya</th>
                                 <th class="px-2 py-1">Aksi</th>
                             </tr>
                         </thead>
@@ -75,12 +78,9 @@
                                     <td class="px-2 py-0">{{ $item->title }}</td>
                                     <td class="px-2 py-0">{{ $item->owner->name }}</td>
                                     <td class="px-2 py-0">
-                                        {{ $jumlah }}
+                                        {{ 'Rp ' . number_format($estimasi, 0, ',', '.') }}
                                     </td>
-                                    <td class="px-2 py-0">
-                                        {{ $estimasi }}
-                                    </td>
-                                    <td class="px-2 py-0">{{ $total }}</td>
+                                    <td class="px-2 py-0">{{ 'Rp ' . number_format($total, 0, ',', '.') }}</td>
                                     <td class="px-2 py-0">
                                         @if ($item->status == 'aktif')
                                             <a href="{{ route('purchase.create', $item->uuid) }}"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\ProjectsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Material;
 use App\Models\MaterialOrder;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PurchaseController extends Controller
 {
@@ -37,7 +39,7 @@ class PurchaseController extends Controller
         }
 
         // Melakukan paginasi dengan jumlah item per halaman 2
-        $projects = $query->paginate(2);
+        $projects = $query->paginate(10);
 
         // Mengembalikan view dengan data materials
         return view('pages.purchase.index', compact('projects'));
@@ -197,5 +199,10 @@ try {
     public function destroy(string $id)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProjectsExport, 'Purchase.xlsx');
     }
 }

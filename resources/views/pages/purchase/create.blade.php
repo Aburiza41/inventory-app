@@ -66,11 +66,11 @@
                         </div>
 
                         <div class="mb-5 w-full">
-                            <label for="bukti_pembayaran"
+                            <label for="nota"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Nota</label>
                                 <input type="text" id="nota" name="nota"
                                     class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name@flowbite.com" required />
+                                    placeholder="Masukan Nomor Nota" required />
                         </div>
 
                         <div class="mb-5 w-full">
@@ -79,23 +79,23 @@
                                     Belanja</label>
                                 <input type="file" id="bukti_pembayaran" name="bukti_pembayaran"
                                     class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name@flowbite.com" required />
+                                     required />
                         </div>
 
                         <div class="mb-5 w-full">
-                            <label for="bukti_pembayaran"
+                            <label for="payment"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total Bayar</label>
                                 <input type="number" id="payment" name="payment"
                                     class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name@flowbite.com" required />
+                                    placeholder="Masukan Total Bayar" required />
                         </div>
 
                         <div class="mb-5 w-full">
-                            <label for="bukti_pembayaran"
+                            <label for="due_date"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Batas Akhir Pembayaran</label>
                                 <input type="date" id="due_date" name="due_date"
                                     class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="name@flowbite.com" />
+                                    placeholder="Masukan Matas Akhir Pembayaran" />
                         </div>
 
                         <div class="flex items-start mb-5 pb-5 border-b-4 border-gray-500 w-full">
@@ -140,7 +140,7 @@
                                         </label>
                                         <input type="text" id="material" name="material[]"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Jumlah" required value="{{ $item->material->title }}" readonly />
+                                             required value="{{ $item->material->title }}" readonly />
                                     </div>
 
                                     <div>
@@ -150,37 +150,37 @@
                                         </label>
                                         <input type="text" id="satuan" name="satuan[]"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Jumlah" required value="{{ $item->material->unit }}" readonly />
+                                             required value="{{ $item->material->unit }}" readonly />
                                     </div>
 
                                     <div>
-                                        <label for="satuan"
+                                        <label for="jumlah"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Satuan
+                                            Jumlah Beli
                                         </label>
                                         <input type="text" id="jumlah" name="jumlah[]"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Jumlah" required value="{{ $item->quantity }}" readonly />
+                                             required value="{{ $item->quantity }}" readonly />
                                     </div>
 
                                     <div>
                                         <label for="harga"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Jenis
+                                            Jenis Bahan Beli
                                         </label>
                                         <input type="text" id="jenis" name="jenis[]"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Harga" required />
+                                            placeholder="Jenis Bahan Beli" required />
                                     </div>
 
                                     <div>
                                         <label for="harga"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Harga
+                                            Harga Beli
                                         </label>
                                         <input type="number" id="harga" name="harga[]"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Harga" required />
+                                            placeholder="Harga Beli" required />
                                     </div>
                                     <div>
                                         <label for="diskon"
@@ -214,7 +214,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Tambah Data Owner
+                        Tambah Data Supplier
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -232,27 +232,27 @@
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required>
+                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nama" required>
                         </div>
                         <div class="col-span-2 sm:col-span-2">
                             <label for="phone_1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telpon Utama</label>
-                            <input type="number" name="phone_1" id="phone_1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required>
+                            <input type="number" name="phone_1" id="phone_1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor Telpon Utama" required>
                         </div>
                         <div class="">
                             <label for="phone_2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telpon Opsionan 1</label>
-                            <input type="number" name="phone_2" id="phone_2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999">
+                            <input type="number" name="phone_2" id="phone_2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor Telpon Opsional 1">
                         </div>
                         <div class="">
                             <label for="phone_3" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Telpon Opsionan 2</label>
-                            <input type="number" name="phone_3" id="phone_3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999">
+                            <input type="number" name="phone_3" id="phone_3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nomor Telpon Oprional 2">
                         </div>
                         <div class="col-span-2">
                             <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                            <textarea id="address" name="adress" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product address here"></textarea>
+                            <textarea id="address" name="address" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat"></textarea>
                         </div>
                         <div class="col-span-2">
                             <label for="perusahaan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Perusahaan</label>
-                            <textarea id="perusahaan" name="perusahaan" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write product perusahaan here"></textarea>
+                            <textarea id="perusahaan" name="perusahaan" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan / Toko"></textarea>
                         </div>
                     </div>
                     <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

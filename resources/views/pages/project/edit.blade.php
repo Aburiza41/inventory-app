@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between align-middle">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Ubah Data Owner '. $item->title) }}
+                {{ __('Ubah Data Proyek '. $item->title) }}
             </h2>
 
-            <a href="{{ route('owner.index') }}"
+            <a href="{{ route('project.index') }}"
                 class="px-4 py-2 rounded bg-gray-500 text-white flex justify-between align-middle">
                 <box-icon name='left-arrow-alt' color="#EB3678" class="bg-white rounded"></box-icon>
                 <span class="ms-2 text-white font-bold">Kembali</span>

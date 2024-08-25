@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\ProjectMaterialListsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectMaterialList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PurchaseOrderController extends Controller
@@ -36,7 +38,7 @@ class PurchaseOrderController extends Controller
             });
         }
 
-        $ProjectMaterialLists = $query->paginate(2);
+        $ProjectMaterialLists = $query->paginate(10);
 
         return view('pages.purchase.order.index', compact('ProjectMaterialLists'));
     }
@@ -155,5 +157,10 @@ class PurchaseOrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProjectMaterialListsExport, 'PO.xlsx');
     }
 }

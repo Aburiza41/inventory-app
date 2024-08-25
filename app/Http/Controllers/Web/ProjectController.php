@@ -31,7 +31,7 @@ class ProjectController extends Controller
         }
 
         // Melakukan paginasi dengan jumlah item per halaman 2
-        $projects = $query->paginate(2);
+        $projects = $query->paginate(10);
 
         // Mengembalikan view dengan data materials
         return view('pages.project.index', compact('projects'));

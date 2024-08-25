@@ -5,7 +5,7 @@
                 {{ __('Ubah Data Supplier '. $item->name) }}
             </h2>
 
-            <a href="{{ route('owner.index') }}"
+            <a href="{{ route('supplier.index') }}"
                 class="px-4 py-2 rounded bg-gray-500 text-white flex justify-between align-middle">
                 <box-icon name='left-arrow-alt' color="#EB3678" class="bg-white rounded"></box-icon>
                 <span class="ms-2 text-white font-bold">Kembali</span>

@@ -47,8 +47,8 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
                     <div class="mb-4">
-                        <h1>Estimasi : {{ $estimasi }}</h1>
-                        <h1>Total : {{ $total }}</h1>
+                        <h1>Estimasi : {{ 'Rp ' . number_format($estimasi, 0, ',', '.') }} </h1>
+                        <h1>Total : {{ 'Rp ' . number_format($total, 0, ',', '.') }}</h1>
                     </div>
                     <table class="table-auto w-full">
                         <thead class="text-left border-b-2 border-gray-500 bg-gray-500 text-white">
@@ -84,16 +84,16 @@
                                         {{ $item->quantity }}
                                     </td>
                                     <td class="px-2 py-0">
-                                        {{ $item->price }}
+                                        {{ 'Rp ' . number_format($item->price, 0, ',', '.') }}
                                     </td>
                                     <td class="px-2 py-0">
                                         {{ $v_project_material_list->material_order_list->brand }}
                                     </td>
                                     <td class="px-2 py-0">
-                                        {{ $v_project_material_list->material_order_list->price }}
+                                        {{ 'Rp ' . number_format($v_project_material_list->material_order_list->price, 0, ',', '.') }}
                                     </td>
                                     <td class="px-2 py-0">
-                                        {{ $v_project_material_list->material_order_list->discount }}
+                                        {{ 'Rp ' . number_format($v_project_material_list->material_order_list->discount, 0, ',', '.') }}
                                     </td>
                                     <td class="px-2 py-0">
                                         {{ $v_project_material_list->material_order_list->material_order->supplier->name }}
@@ -152,9 +152,7 @@
                                                     <!-- Modal footer -->
                                                     <div
                                                         class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                        {{-- <button data-modal-hide="default-modal" type="button"
-                                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I
-                                                            Tutup</button> --}}
+                                                        {{-- <button d.</button> --}}
                                                         {{-- <button data-modal-hide="default-modal" type="button"
                                                             class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button> --}}
                                                     </div>
