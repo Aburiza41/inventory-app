@@ -12,18 +12,18 @@
                 </div>
 
                 <!-- Navigation Links -->
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div> --}}
+                </div>
 
-                @if (Auth::user()->role == 'admin')
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- @if (Auth::user()->role == 'admin') --}}
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('purchase.index')" :active="request()->routeIs('purchase.*')">
                             {{ __('Belanja') }}
                         </x-nav-link>
-                    </div>
+                    </div> --}}
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -37,20 +37,20 @@
                             {{ __('Supplier') }}
                         </x-nav-link>
                     </div>
-                @else
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- @else --}}
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('purchase_order.index')" :active="request()->routeIs('purchase_order.*')">
                             {{ __('Daftar Belanja') }}
                         </x-nav-link>
-                    </div>
-                @endif
+                    </div> --}}
+                {{-- @endif --}}
 
                     <!-- Navigation Links -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('inventory.index')" :active="request()->routeIs('inventory.*')">
                             {{ __('Bahan') }}
                         </x-nav-link>
-                    </div>
+                    </div> --}}
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('owner.index')" :active="request()->routeIs('owner.*')">
@@ -61,6 +61,19 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('project.index')" :active="request()->routeIs('project.*')">
                             {{ __('Proyek') }}
+                        </x-nav-link>
+                    </div>
+
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('material.in.index')" :active="request()->routeIs('material.in.*')">
+                            {{ __('Barang Masuk') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('material.out.index')" :active="request()->routeIs('material.out.*')">
+                            {{ __('Barang Masuk') }}
                         </x-nav-link>
                     </div>
 

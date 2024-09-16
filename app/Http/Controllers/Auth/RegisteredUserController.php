@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'phone' => ['required', 'string', 'regex:/^\+?[0-9\s\-\(\)]+$/', 'max:20'],
                 'email' => ['required', 'string', 'email', 'lowercase', 'max:255', 'unique:'.User::class],
-                'role' => ['required', 'string', 'in:project_estimator,admin,'], // Sesuaikan dengan role lain yang dibutuhkan
+                // 'role' => ['required', 'string', 'in:project_estimator,admin,'], // Sesuaikan dengan role lain yang dibutuhkan
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            // 'role' => $request->role,
             'phone' => $request->phone,
         ]);
 

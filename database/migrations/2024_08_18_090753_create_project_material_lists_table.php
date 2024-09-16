@@ -16,10 +16,11 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('material_id')->constrained('materials');
             $table->string('uuid')->unique();
-            $table->string('unit');
+            $table->string('unit')->nullable();
             $table->decimal('quantity', 65, 0)->nullable(); // Jumlah Beli
             $table->decimal('price', 65, 0)->nullable(); // Jumlah Beli
             $table->enum('status', ['PO', 'Dibeli', 'Dibatalkan'])->default('PO');
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
     }

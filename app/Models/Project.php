@@ -9,6 +9,14 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'owner_id',
+        'uuid',
+        'title',
+        'code',
+        'status',
+    ];
+
     public function owner()
     {
         // HasOne

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('material_order_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_id')->constrained('owners');
-            $table->string('uuid')->unique();
-            $table->string('title');
-            $table->string('code')->unique()->nullable();
-            $table->enum('status', ['aktif', 'selesai', 'batal'])->default('aktif');
+            $table->foreignId('material_order_id')->constrained('material_orders');
+            $table->foreignId('user_id')->constrained('users');
+            $table->longText('title');
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('material_order_histories');
     }
 };

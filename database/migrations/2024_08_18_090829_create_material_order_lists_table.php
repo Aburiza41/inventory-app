@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('material_order_id')->constrained('material_orders');
             $table->foreignId('project_material_list_id')->constrained('project_material_lists');
             // $table->foreignId('material_id')->constrained('materials');
-            // $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
+            // $table->string('date')->unique()->nullable();
             $table->string('brand')->nullable();
             // $table->string('brand_description')->nullable();
             // $table->decimal('length', 65, 5)->nullable(); // Panjang
@@ -27,8 +28,8 @@ return new class extends Migration
 
             $table->decimal('price', 65, 0)->nullable(); // Jumlah Beli
             $table->decimal('discount', 65, 0)->nullable(); // Jumlah Beli
-            // $table->decimal('buy_quantity', 65, 5)->nullable(); // Jumlah Beli
-            // $table->decimal('current_quantity', 65, 5)->nullable(); // Jumlah Saat Ini
+            $table->decimal('buy_quantity', 65, 5)->nullable(); // Jumlah Beli
+            $table->decimal('current_quantity', 65, 5)->nullable(); // Jumlah Saat Ini
             $table->timestamps();
         });
     }

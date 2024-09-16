@@ -24,14 +24,14 @@
         </div>
 
         <!-- Pilihan Role -->
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <x-input-label for="role" :value="__('Pilih Jenis Pengguna')" />
             <select id="role" name="role" class="block mt-1 w-full">
                 <option value="admin">Admin</option>
                 <option value="project_estimator">Project Estimator</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
-        </div>
+        </div> --}}
 
         <!-- Password -->
         <div class="mt-4">

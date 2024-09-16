@@ -87,6 +87,18 @@ Route::prefix('/')->middleware(['auth', 'verified'])->group(
             Route::get('/{uuid}/edit', 'edit')->name('.edit');
             Route::patch('/{uuid}/update', 'update')->name('.update');
         });
+
+        Route::prefix('/material')->name('material')->group(function () {
+            Route::prefix('/in')->name('.in')->controller(\App\Http\Controllers\Web\MaterialInController::class)->group(function () {
+                Route::get('/index', 'index')->name('.index');
+                Route::post('/store', 'store')->name('.store');
+            });
+
+            Route::prefix('/out')->name('.out')->controller(\App\Http\Controllers\Web\MaterialOutController::class)->group(function () {
+                Route::get('/index', 'index')->name('.index');
+                Route::post('/store', 'store')->name('.store');
+            });
+        });
 });
 
 Route::middleware('auth')->group(function () {

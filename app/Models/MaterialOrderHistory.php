@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Owner extends Model
+class MaterialOrderHistory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'id',
-        'uuid',
-        'name',
-        'phone_1',
-        'phone_2',
-        'phone_3',
-        'email',
-        'address',
-        'corporate',
+        'material_order_id',
+        'user_id',
+        'title',
+        'desc',
     ];
 }

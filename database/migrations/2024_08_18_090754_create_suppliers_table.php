@@ -18,9 +18,13 @@ return new class extends Migration
             $table->string('phone_1')->unique();
             $table->string('phone_2')->unique()->nullable();
             $table->string('phone_3')->unique()->nullable();
+            $table->string('code')->unique()->nullable();
+            $table->string('nor_rek')->unique()->nullable();
+            $table->string('bank_name')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->string('corporate')->nullable();
+            $table->longText('desc')->nullable();
             $table->timestamps();
         });
     }
