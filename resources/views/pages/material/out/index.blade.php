@@ -13,7 +13,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
 
                     <div class="mb-4">
-                        <form method="POST" action="{{ route('material.in.store') }}" class="flex gap-4" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('material.out.store') }}" class="flex gap-4" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             <input type="file" name="file"
